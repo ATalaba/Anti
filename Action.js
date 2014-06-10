@@ -2,6 +2,10 @@ window.alert("You've started the game");
 var body = document.getElementsByTagName("body")[0];
 var nameChoice = document.createElement("h1");
 var name;
+var choice = document.createElement("h1");
+var button1 = document.createElement("button");
+var button2 = document.createElement("button");
+
 
 function nameChange() {
 	var realName;
@@ -16,7 +20,6 @@ function colorChange() {
 	var favColor;
 	var Color;
 	var answer = true;
-	var choice = document.createElement("h1");
 	choice.style.fontFamily = "Arial";
 	while (answer) {
 		favColor = prompt("What's your favorite primary color?").toUpperCase();
@@ -62,9 +65,19 @@ function colorChange() {
 }
 
 function buttons() {
-	var button1 = document.createElement("button");
-	button1.setAttribute('onClick', "window.location='http://www.fb.com'");
-	button1.appendChild(document.createTextNode("FB"));
+	var wouldYou = document.createElement("h1");
+	wouldYou.appendChild(document.createTextNode("Would you like to play a platformer?"));
+	body.appendChild(wouldYou);
+	button1.setAttribute('onClick', /*"window.location='http://www.fb.com'"*/ 'createGame()');
+	button1.appendChild(document.createTextNode("Yes"));
+	button2.setAttribute('onClick', 'closeWindow');
+	button2.appendChild(document.createTextNode("No"));
+	button2.style.fontSize = "32px";
+	button2.style.fontFamily = "Garamond";
+	button2.style.borderRadius = "200px";
+	button2.setAttribute('type', 'button');
+	button2.style.height = "100px";
+	button2.style.width = "100px";
 	button1.style.fontSize = "32px";
 	button1.style.fontFamily = "Garamond";
 	button1.style.borderRadius = "200px";
@@ -72,8 +85,26 @@ function buttons() {
 	button1.style.height = "100px";
 	button1.style.width = "100px";
 	body.appendChild(button1);
+	body.appendChild(button2);
 }
 
 nameChange();
 colorChange();
 buttons();
+
+function createGame() {
+	body.removeChild(nameChoice);
+	body.removeChild(choice);
+	body.removeChild(button2);
+	body.removeChild(button1);
+	var game = new Phaser.Game(800, 600, Phaser.AUTO, '', { preload: preload, create: create, update: update });
+}
+
+function preload() {
+}
+
+function create() {
+}
+
+function update() {
+}
